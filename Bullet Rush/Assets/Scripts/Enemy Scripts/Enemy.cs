@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
 
     public int health;
 
-
     public bool GotDamage(int damage)
     {
         this.health -= damage;

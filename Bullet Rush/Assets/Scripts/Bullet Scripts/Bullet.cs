@@ -6,17 +6,16 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private int powerOfBullet;
     [SerializeField] private int speedOfBullet;
+    
     public Rigidbody rigidbodyOfBullet;
     private Vector3 bulletTargetPosition;
 
+    public CanvasScript canvasScript;
+
     void Start()
     {
-        Destroy(gameObject, 4);
-    }
-
-    void Update()
-    {
-        
+        canvasScript = GameObject.Find("Game Over Canvas").GetComponent<CanvasScript>();
+        Destroy(gameObject, 4);  // If it doesn't hit enemy
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +25,7 @@ public class Bullet : MonoBehaviour
             bool isEnemyDead = other.GetComponent<Enemy>().GotDamage(powerOfBullet);   // It damages the enemy's health, keeps if its dead or alive
 
             if (isEnemyDead == true){
+                canvasScript.UpdateEnemyNumber();
                 Destroy(other.gameObject);
             }
             Destroy(gameObject);

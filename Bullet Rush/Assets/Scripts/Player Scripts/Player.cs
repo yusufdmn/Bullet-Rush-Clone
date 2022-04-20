@@ -8,11 +8,7 @@ public class Player : MonoBehaviour
     public Joystick joystick;
     [SerializeField] private float speedOfPlayer;
 
-
-    void Start()
-    {
-        
-    }
+    public CanvasScript canvasScript;
 
     void Update()
     {
@@ -22,5 +18,15 @@ public class Player : MonoBehaviour
         Vector3 newPosition = new Vector3(x, 0, y);
         transform.position += newPosition;
 
+        transform.rotation = Quaternion.LookRotation(newPosition);
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            canvasScript.Lost();
+        }
     }
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 public class BulletSpawner : MonoBehaviour
 {
     public GameObject bullet;
+
     private float bulletSpawnTimerLimit;
     private float bulletSpawnTimer;
 
@@ -18,20 +18,22 @@ public class BulletSpawner : MonoBehaviour
     void Start()
     {
         shouldSpawn = false;
-        bulletSpawnTimerLimit = 1f;
+        bulletSpawnTimerLimit = 0.5f;
         distanceLimitWithEnemy = 10f;
     }
 
-void Update()
+
+    void Update()
     {
 
         bulletSpawnTimer += Time.deltaTime;
+
         if (bulletSpawnTimer > bulletSpawnTimerLimit)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             closestEnemyPos = DetectClosestEnemy(enemies);
 
-            shouldSpawn = DetectDistance(closestEnemyPos);
+            shouldSpawn = DetectIfEnemyCloseEnough(closestEnemyPos);
         }
 
         if(shouldSpawn == true)
@@ -74,7 +76,7 @@ void Update()
     }
 
 
-    public bool DetectDistance(Vector3 closerEnemyPosition){
+    public bool DetectIfEnemyCloseEnough(Vector3 closerEnemyPosition){
         if (Vector3.Magnitude(closerEnemyPosition - gameObject.transform.position) <= distanceLimitWithEnemy) {
             return true;
         }
