@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float speedOfPlayer;
     static bool isGameOver;
 
+    public Animator animatorPlayer;
+
     void Start()
     {
         isGameOver = false;
@@ -20,6 +22,15 @@ public class Player : MonoBehaviour
         if(isGameOver == false) {
             float x = joystick.Horizontal * speedOfPlayer * Time.deltaTime;
             float y = joystick.Vertical * speedOfPlayer * Time.deltaTime;
+
+            if(x == 0 && y == 0)
+            {
+                animatorPlayer.SetBool("isRunning", false);
+            }
+            else
+            {
+                animatorPlayer.SetBool("isRunning", true);
+            }
 
             Vector3 newPosition = new Vector3(x, 0, y);
             transform.position += newPosition;

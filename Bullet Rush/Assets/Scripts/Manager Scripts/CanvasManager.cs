@@ -33,23 +33,18 @@ public class CanvasManager : MonoBehaviour
 
     private void Start()
     {
-        int totalEnemy = GameManager.Instance.totalEnemyAmount;
-        enemyLeftText.text = "Enemy Left: " + totalEnemy;
+
     }
 
 
-    public void UpdateEnemyText()
+    public void UpdateEnemyText(int enemyLeft)
     {
-        int enemyleft = GameManager.Instance.enemyLeft;
-        enemyLeftText.text = "Enemy Left: " + enemyleft;
+        enemyLeftText.text = "Enemy Left: " + enemyLeft;
     }
 
 
-    public void UpdateProgressBar()
+    public void UpdateProgressBar(int totalEnemy, int enemyLeft)
     {
-        int totalEnemy = GameManager.Instance.totalEnemyAmount;
-        int enemyLeft = GameManager.Instance.enemyLeft;
-
         int killedEnemy = totalEnemy - enemyLeft;
         
         float fillAmount = ((float)killedEnemy / (float)totalEnemy);
