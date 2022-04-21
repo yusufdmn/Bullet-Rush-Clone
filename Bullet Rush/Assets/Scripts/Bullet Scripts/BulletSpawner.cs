@@ -12,11 +12,14 @@ public class BulletSpawner : MonoBehaviour
 
     private float distanceLimitWithEnemy;     // To spawn bullet when enemies are close enough
     private bool shouldSpawn;
+    
+    private static bool isGameOver;
 
-    Vector3 closestEnemyPos;
+    private Vector3 closestEnemyPos;
 
     void Start()
     {
+        isGameOver = false;
         shouldSpawn = false;
         bulletSpawnTimerLimit = 0.5f;
         distanceLimitWithEnemy = 10f;
@@ -26,27 +29,28 @@ public class BulletSpawner : MonoBehaviour
     void Update()
     {
 
-        bulletSpawnTimer += Time.deltaTime;
-
-        if (bulletSpawnTimer > bulletSpawnTimerLimit)
+        if(isGameOver == false)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            closestEnemyPos = DetectClosestEnemy(enemies);
+            bulletSpawnTimer += Time.deltaTime;
 
-            shouldSpawn = DetectIfEnemyCloseEnough(closestEnemyPos);
-        }
+            if (bulletSpawnTimer > bulletSpawnTimerLimit)
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                closestEnemyPos = DetectClosestEnemy(enemies);
 
-        if(shouldSpawn == true)
-        {
-            InstantiateBullet(closestEnemyPos);
-            shouldSpawn = false;
-            bulletSpawnTimer = 0;
+                shouldSpawn = DetectIfEnemyCloseEnough(closestEnemyPos);
+            }
+
+
+            if (shouldSpawn == true)
+            {
+                Debug.Log(closestEnemyPos);
+                InstantiateBullet(closestEnemyPos);
+                shouldSpawn = false;
+                bulletSpawnTimer = 0;
+            }
         }
     }
-
-
-
-
 
 
     public Vector3 DetectClosestEnemy(GameObject[] enemies)
@@ -86,4 +90,8 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
+    public static void StopSpawnBullet()
+    {
+        isGameOver = true;
+    }
 }

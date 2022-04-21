@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
 
     public int health;
+    
+    public NavMeshAgent enemyAgent;
+    public Transform player;
 
-    public bool GotDamage(int damage)
+    public float distanceLimit;
+
+    public void GotDamage(int damage)
     {
         this.health -= damage;
 
-        if(health <= 0)      // It will return true if the enemy is dead
+        if(health <= 0)  
         {
-            return true;
-        }
-        else                // It will return false if the enemy is still alive
-        {
-            return false;
+            GameManager.Instance.EnemyDied();
+            Destroy(gameObject);
         }
     }
+
 
 }

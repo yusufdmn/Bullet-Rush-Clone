@@ -6,15 +6,11 @@ using UnityEngine.AI;
 public class LittleEnemy : Enemy
 {
 
-    private NavMeshAgent enemyAgent;
-    public Transform player;
-
-    public float distanceLimit;
-
     private void Start()
     {
         enemyAgent = gameObject.GetComponent<NavMeshAgent>();
     }
+   
 
     void Update()
     {

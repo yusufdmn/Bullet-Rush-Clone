@@ -7,18 +7,25 @@ public class Player : MonoBehaviour
 
     public Joystick joystick;
     [SerializeField] private float speedOfPlayer;
+    static bool isGameOver;
 
-    public CanvasScript canvasScript;
-
+    void Start()
+    {
+        isGameOver = false;
+    }
+  
     void Update()
     {
-        float x = joystick.Horizontal * speedOfPlayer * Time.deltaTime;
-        float y = joystick.Vertical * speedOfPlayer * Time.deltaTime;
 
-        Vector3 newPosition = new Vector3(x, 0, y);
-        transform.position += newPosition;
+        if(isGameOver == false) {
+            float x = joystick.Horizontal * speedOfPlayer * Time.deltaTime;
+            float y = joystick.Vertical * speedOfPlayer * Time.deltaTime;
 
-        transform.rotation = Quaternion.LookRotation(newPosition);
+            Vector3 newPosition = new Vector3(x, 0, y);
+            transform.position += newPosition;
+
+            transform.rotation = Quaternion.LookRotation(newPosition);
+        }
 
     }
 
@@ -26,7 +33,13 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            canvasScript.Lost();
+            GameManager.Instance.PlayerLost();
         }
     }
+
+    public static void StopMove()
+    {
+        isGameOver = true;
+    }
+
 }

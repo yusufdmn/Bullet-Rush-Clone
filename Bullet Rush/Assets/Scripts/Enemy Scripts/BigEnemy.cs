@@ -5,10 +5,6 @@ using UnityEngine.AI;
 
 public class BigEnemy : Enemy
 {
-    private NavMeshAgent enemyAgent;
-    public Transform player;
-
-    public float distanceLimit;
 
     public Transform frontOfPlayer;
     public Transform backOfPlayer;
