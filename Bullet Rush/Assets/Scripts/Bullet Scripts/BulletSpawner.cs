@@ -17,11 +17,15 @@ public class BulletSpawner : MonoBehaviour
 
     private Vector3 closestEnemyPos;
 
+    private string currentBulletType;
+
     void Start()
     {
+        currentBulletType = "Bullet1";
+
         isGameOver = false;
         shouldSpawn = false;
-        bulletSpawnTimerLimit = 0.5f;
+        bulletSpawnTimerLimit = 0.3f;
         distanceLimitWithEnemy = 10f;
     }
 
@@ -41,11 +45,9 @@ public class BulletSpawner : MonoBehaviour
                 shouldSpawn = DetectIfEnemyCloseEnough(closestEnemyPos);
             }
 
-
             if (shouldSpawn == true)
             {
-                Debug.Log(closestEnemyPos);
-                InstantiateBullet(closestEnemyPos);
+                SpawnBullet(closestEnemyPos);
                 shouldSpawn = false;
                 bulletSpawnTimer = 0;
             }
@@ -53,7 +55,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
 
-    public Vector3 DetectClosestEnemy(GameObject[] enemies)
+    private Vector3 DetectClosestEnemy(GameObject[] enemies)
     {
         Vector3 closestEnemyPos = enemies[0].transform.position;
         float closestDistance = (closestEnemyPos - gameObject.transform.position).magnitude;
@@ -72,15 +74,14 @@ public class BulletSpawner : MonoBehaviour
         return closestEnemyPos;
     }
 
-
-    public void InstantiateBullet(Vector3 target)
+    private void SpawnBullet( Vector3 target)
     {
-        GameObject newbullet = Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
-        newbullet.GetComponent<Bullet>().ThrowBullet(target);
+        GameObject spannedBullet = BulletPool.Instance.SpawnBulletFromPool(currentBulletType, transform.position, Quaternion.identity);
+        spannedBullet.SetActive(true);
+        spannedBullet.GetComponent<Bullet>().ThrowBullet(target);
     }
 
-
-    public bool DetectIfEnemyCloseEnough(Vector3 closerEnemyPosition){
+    private bool DetectIfEnemyCloseEnough(Vector3 closerEnemyPosition){
         if (Vector3.Magnitude(closerEnemyPosition - gameObject.transform.position) <= distanceLimitWithEnemy) {
             return true;
         }
@@ -89,6 +90,7 @@ public class BulletSpawner : MonoBehaviour
             return false;
         }
     }
+
 
     public static void StopSpawnBullet()
     {

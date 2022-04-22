@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1292639961181015147
 Transform:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 2901440505086725621}
   - component: {fileID: 2901440505086725622}
   - component: {fileID: 2901440505086725625}
-  - component: {fileID: 2901440505086725626}
+  - component: {fileID: 7910849644685639710}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -253,7 +253,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2901440505086725626
+--- !u!114 &7910849644685639710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,9 +262,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2901440505086725623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dafc6f5cb25f20429dfb5237565255c, type: 3}
+  m_Script: {fileID: 11500000, guid: cbe3185ae0538694b82239260ef11c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   powerOfBullet: 100
-  speedOfBullet: 100
+  speedOfBullet: 10000
+  bulletTag: Bullet1
   rigidbodyOfBullet: {fileID: 2901440505086725625}
+  bulletTargetPosition: {x: 0, y: 0, z: 0}

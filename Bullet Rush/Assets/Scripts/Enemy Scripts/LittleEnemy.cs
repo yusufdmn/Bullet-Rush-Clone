@@ -14,11 +14,11 @@ public class LittleEnemy : Enemy
 
     void Update()
     {
-        float distance = (player.position - transform.position).magnitude;
+        float distance = CalculateDistance();
 
         if (distance <= distanceLimit)
         {
-            enemyAgent.SetDestination(player.position);
+            AttackToPlayerDirectly();
         }
     }
 }

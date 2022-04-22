@@ -16,12 +16,24 @@ public class Enemy : MonoBehaviour
     public void GotDamage(int damage)
     {
         this.health -= damage;
+        Debug.Log(1);
 
-        if(health <= 0)  
+        if (health <= 0)  
         {
             GameManager.Instance.EnemyDied();
             Destroy(gameObject);
         }
+    }
+
+    public float CalculateDistance()
+    {
+        float distance = (player.position - transform.position).magnitude;
+        return distance;
+    }
+
+    public void AttackToPlayerDirectly()
+    {
+        enemyAgent.SetDestination(player.position);
     }
 
 

@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private int powerOfBullet;
-    [SerializeField] private int speedOfBullet;
-    
+    public int powerOfBullet;
+    public int speedOfBullet;
+    public string bulletTag;
+
     public Rigidbody rigidbodyOfBullet;
-    private Vector3 bulletTargetPosition;
+
+    public Vector3 bulletTargetPosition;
+
 
     void Start()
     {
-        Destroy(gameObject, 4);        // If it doesn't hit enemy
+        Invoke("InActivateBullet", 2);      // If it doesn't hit enemy
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Enemy")
         {
-            Debug.Log(45645);
-            other.GetComponent<Enemy>().GotDamage(powerOfBullet);  
-            Destroy(gameObject);
+            other.GetComponent<Enemy>().GotDamage(powerOfBullet);
+            gameObject.SetActive(false);
         }
     }
 
@@ -29,7 +31,12 @@ public class Bullet : MonoBehaviour
     {
         bulletTargetPosition = enemyPosition - gameObject.transform.position;
         bulletTargetPosition.y = 0;
-        rigidbodyOfBullet.AddForce(bulletTargetPosition * speedOfBullet);
+        rigidbodyOfBullet.AddForce(bulletTargetPosition * speedOfBullet * Time.deltaTime);
     }
     
+
+    private void InActivateBullet()
+    {
+        gameObject.SetActive(false);
+    }
 }

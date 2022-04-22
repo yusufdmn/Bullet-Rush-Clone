@@ -16,26 +16,18 @@ public class Player : MonoBehaviour
         isGameOver = false;
     }
   
+
     void Update()
     {
 
-        if(isGameOver == false) {
-            float x = joystick.Horizontal * speedOfPlayer * Time.deltaTime;
-            float y = joystick.Vertical * speedOfPlayer * Time.deltaTime;
+        if(isGameOver == true)
+        {
+            ChangeRunAnimation(false);
+            return;
+        }
 
-            if(x == 0 && y == 0)
-            {
-                animatorPlayer.SetBool("isRunning", false);
-            }
-            else
-            {
-                animatorPlayer.SetBool("isRunning", true);
-            }
-
-            Vector3 newPosition = new Vector3(x, 0, y);
-            transform.position += newPosition;
-
-            transform.rotation = Quaternion.LookRotation(newPosition);
+        else {
+            MoveAndRotatePlayer();
         }
 
     }
@@ -50,7 +42,32 @@ public class Player : MonoBehaviour
 
     public static void StopMove()
     {
-        isGameOver = true;
+        isGameOver = true;       
+    }
+
+    public void ChangeRunAnimation(bool isRunning)
+    {
+        animatorPlayer.SetBool("isRunning", isRunning);
+    }
+
+    public void MoveAndRotatePlayer()
+    {
+        float x = joystick.Horizontal * speedOfPlayer * Time.deltaTime;
+        float y = joystick.Vertical * speedOfPlayer * Time.deltaTime;
+
+        if (x == 0 && y == 0)
+        {
+            ChangeRunAnimation(false);
+        }
+        else
+        {
+            ChangeRunAnimation(true);
+        }
+
+        Vector3 newPosition = new Vector3(x, 0, y);
+        transform.position += newPosition;
+
+        transform.rotation = Quaternion.LookRotation(newPosition);
     }
 
 }
