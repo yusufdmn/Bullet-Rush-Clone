@@ -25,7 +25,7 @@ public class BulletSpawner : MonoBehaviour
 
         isGameOver = false;
         shouldSpawn = false;
-        bulletSpawnTimerLimit = 0.3f;
+        bulletSpawnTimerLimit = 0.2f;
         distanceLimitWithEnemy = 10f;
     }
 
@@ -76,7 +76,7 @@ public class BulletSpawner : MonoBehaviour
 
     private void SpawnBullet( Vector3 target)
     {
-        GameObject spannedBullet = BulletPool.Instance.SpawnBulletFromPool(currentBulletType, transform.position, Quaternion.identity);
+        GameObject spannedBullet = PoolManager.Instance.SpawnBulletFromPool(currentBulletType, transform.position, Quaternion.identity);
         spannedBullet.SetActive(true);
         spannedBullet.GetComponent<Bullet>().ThrowBullet(target);
     }

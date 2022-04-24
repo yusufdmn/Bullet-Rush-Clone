@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
     public void ThrowBullet(Vector3 enemyPosition)
     {
         bulletTargetPosition = enemyPosition - gameObject.transform.position;
+        rigidbodyOfBullet.velocity = Vector3.zero;
         rigidbodyOfBullet.AddForce(bulletTargetPosition * speedOfBullet * Time.deltaTime);
     }
     

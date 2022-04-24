@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy")
@@ -40,15 +42,19 @@ public class Player : MonoBehaviour
         }
     }
 
+
     public static void StopMove()
     {
         isGameOver = true;       
     }
 
+
     public void ChangeRunAnimation(bool isRunning)
     {
         animatorPlayer.SetBool("isRunning", isRunning);
     }
+
+
 
     public void MoveAndRotatePlayer()
     {
