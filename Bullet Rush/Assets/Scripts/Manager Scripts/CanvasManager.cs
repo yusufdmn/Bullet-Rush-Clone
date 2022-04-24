@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-
-
     public GameObject winPanel;
     public GameObject retryPanel;
     public GameObject joystickCanvas;
@@ -31,22 +29,11 @@ public class CanvasManager : MonoBehaviour
     }                                           // ******Definition of SÝngleton********
 
 
-    private void Start()
-    {
-
-    }
-
-
-    public void UpdateEnemyText(int enemyLeft)
+    public void UpdateEnemyTextAndProgressBar(int totalEnemy, int enemyLeft)
     {
         enemyLeftText.text = "Enemy Left: " + enemyLeft;
-    }
 
-
-    public void UpdateProgressBar(int totalEnemy, int enemyLeft)
-    {
-        int killedEnemy = totalEnemy - enemyLeft;
-        
+        int killedEnemy = totalEnemy - enemyLeft;      
         float fillAmount = ((float)killedEnemy / (float)totalEnemy);
         progressBar.fillAmount = fillAmount;
     }

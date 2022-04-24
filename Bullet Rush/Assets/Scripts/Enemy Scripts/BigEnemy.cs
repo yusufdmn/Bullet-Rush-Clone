@@ -13,6 +13,12 @@ public class BigEnemy : Enemy
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
+
+        frontOfPlayer = player.GetChild(0);
+        backOfPlayer = player.GetChild(1);
+
+
         isAtBehind = false;
         enemyAgent = gameObject.GetComponent<NavMeshAgent>();
     }
@@ -35,7 +41,6 @@ public class BigEnemy : Enemy
 
             if(isAtBehind == true)  // If Enemy is closer to Player's back, it attacks
             {
-                Debug.Log(15643);
                 AttackToPlayerDirectly();
             }
             else         // If Enemy is closer to Player's front, it moves to player's behind

@@ -8,6 +8,7 @@ public class LittleEnemy : Enemy
 
     private void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         enemyAgent = gameObject.GetComponent<NavMeshAgent>();
     }
    

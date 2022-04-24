@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
     public int powerOfBullet;
     public int speedOfBullet;
     public string bulletTag;
@@ -30,7 +31,6 @@ public class Bullet : MonoBehaviour
     public void ThrowBullet(Vector3 enemyPosition)
     {
         bulletTargetPosition = enemyPosition - gameObject.transform.position;
-        bulletTargetPosition.y = 0;
         rigidbodyOfBullet.AddForce(bulletTargetPosition * speedOfBullet * Time.deltaTime);
     }
     

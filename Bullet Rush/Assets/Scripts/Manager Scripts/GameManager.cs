@@ -34,15 +34,14 @@ public class GameManager : MonoBehaviour
         totalEnemyAmount = enemies.Length;
         enemyLeft = totalEnemyAmount;
 
-        CanvasManager.Instance.UpdateEnemyText(enemyLeft);
+        CanvasManager.Instance.UpdateEnemyTextAndProgressBar(totalEnemyAmount, enemyLeft);
     }
     
 
     public void EnemyDied()
     {
         enemyLeft--;
-        CanvasManager.Instance.UpdateEnemyText(enemyLeft);
-        CanvasManager.Instance.UpdateProgressBar(totalEnemyAmount, enemyLeft);
+        CanvasManager.Instance.UpdateEnemyTextAndProgressBar(totalEnemyAmount, enemyLeft);
 
         bool isPlayerWon = ControlIfPlayerWon();
 

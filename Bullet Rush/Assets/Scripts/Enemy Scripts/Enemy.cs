@@ -16,8 +16,6 @@ public class Enemy : MonoBehaviour
     public void GotDamage(int damage)
     {
         this.health -= damage;
-        Debug.Log(1);
-
         if (health <= 0)  
         {
             GameManager.Instance.EnemyDied();
