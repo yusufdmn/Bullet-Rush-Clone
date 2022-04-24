@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        totalEnemyAmount = enemies.Length;
+        totalEnemyAmount = LevelManager.Instance.littleEnemyAmunt + LevelManager.Instance.bigEnemyAmunt;
         enemyLeft = totalEnemyAmount;
 
         CanvasManager.Instance.UpdateEnemyTextAndProgressBar(totalEnemyAmount, enemyLeft);
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void Playerwon()
     {
+        LevelManager.Instance.IncreaseLevel();
         isGameOver = true;
         CanvasManager.Instance.ActivateWinPanel();
         BulletSpawner.StopSpawnBullet();
