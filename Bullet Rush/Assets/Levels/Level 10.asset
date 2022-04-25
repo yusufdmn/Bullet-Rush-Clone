@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f4d319219f77f841a6b181f72a05f97, type: 3}
-  m_Name: Level 9
+  m_Name: Level 10
   m_EditorClassIdentifier: 
   level: 1
-  littleEnemyAmount: 0
-  bigEnemyAmount: 10
+  littleEnemyAmount: 15
+  bigEnemyAmount: 15

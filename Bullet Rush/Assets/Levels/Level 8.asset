@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Level 8
   m_EditorClassIdentifier: 
   level: 1
-  littleEnemyAmount: 0
+  littleEnemyAmount: 12
   bigEnemyAmount: 10

@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)  
         {
             GameManager.Instance.EnemyDied();
+            EnemySpawner.Instance.enemies.Remove(gameObject);
             Destroy(gameObject);
         }
     }

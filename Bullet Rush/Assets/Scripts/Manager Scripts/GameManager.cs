@@ -28,10 +28,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         isGameOver = false;
+        ArrayList enemies = EnemySpawner.Instance.enemies;
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        totalEnemyAmount = LevelManager.Instance.littleEnemyAmunt + LevelManager.Instance.bigEnemyAmunt;
+        totalEnemyAmount = enemies.Count;
         enemyLeft = totalEnemyAmount;
 
         CanvasManager.Instance.UpdateEnemyTextAndProgressBar(totalEnemyAmount, enemyLeft);

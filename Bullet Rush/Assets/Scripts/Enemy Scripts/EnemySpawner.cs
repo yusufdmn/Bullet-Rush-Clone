@@ -4,18 +4,39 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private static EnemySpawner _instance;
+    public static EnemySpawner Instance { get { return _instance; } }
 
-    private int level;
-    private int littleEnemyAmount;
-    private int bigEnemyAmount;
+
+    public int level;
+    public int littleEnemyAmount;
+    public int bigEnemyAmount;
+    public ArrayList enemies = new ArrayList();
+
+
+    
 
     [SerializeField] private float littEnemyPositionY;
     [SerializeField] private float bigEnemyPositionY;
 
     [SerializeField] Transform[] spawnSpots;
     
-    void Start()
+    void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    private void Start()
+    {
+
+
         littleEnemyAmount = LevelManager.Instance.littleEnemyAmunt;
         bigEnemyAmount = LevelManager.Instance.bigEnemyAmunt;
         Debug.Log(littleEnemyAmount + "   " + bigEnemyAmount);
@@ -36,17 +57,20 @@ public class EnemySpawner : MonoBehaviour
         return spawnPosition;
     }
 
+
     private void SpawnEnemies(int littleEnemyAmount, int bigEnemyAmount)
     {
-
         for (int i = 0; i < littleEnemyAmount; i++)         //Spawn Little Enemies
         {
             Vector3 spawnPosition = GenerateRandomSpawnPosition();
             spawnPosition.y = littEnemyPositionY;
 
             string littleEnemyTag = "LittleE";
-            GameObject spannedLittleEnemy = PoolManager.Instance.SpawnBulletFromPool(littleEnemyTag, spawnPosition, Quaternion.identity);
-            spannedLittleEnemy.SetActive(true);
+            GameObject spawnedLittleEnemy = PoolManager.Instance.SpawnBulletFromPool(littleEnemyTag, spawnPosition, Quaternion.identity);
+            spawnedLittleEnemy.SetActive(true);
+            enemies.Add(spawnedLittleEnemy);
+            Debug.Log(enemies);
+
         }
 
 
@@ -56,8 +80,10 @@ public class EnemySpawner : MonoBehaviour
             spawnPosition.y = bigEnemyPositionY;
 
             string bigEnemyTag = "BigE";
-            GameObject spannedBigEnemy = PoolManager.Instance.SpawnBulletFromPool(bigEnemyTag, spawnPosition, Quaternion.identity);
-            spannedBigEnemy.SetActive(true);
+            GameObject spawnedBigEnemy = PoolManager.Instance.SpawnBulletFromPool(bigEnemyTag, spawnPosition, Quaternion.identity);
+            spawnedBigEnemy.SetActive(true);
+            enemies.Add(spawnedBigEnemy);
+
         }
 
     }

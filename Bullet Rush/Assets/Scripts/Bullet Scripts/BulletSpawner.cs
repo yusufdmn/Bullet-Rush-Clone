@@ -39,7 +39,9 @@ public class BulletSpawner : MonoBehaviour
 
             if (bulletSpawnTimer > bulletSpawnTimerLimit)
             {
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                ArrayList enemiesList = EnemySpawner.Instance.enemies;
+
+                GameObject[] enemies = enemiesList.ToArray(typeof(GameObject)) as GameObject[];
                 closestEnemyPos = DetectClosestEnemy(enemies);
 
                 shouldSpawn = DetectIfEnemyCloseEnough(closestEnemyPos);
