@@ -39,7 +39,6 @@ public class LevelManager : MonoBehaviour
         littleEnemyAmunt = currentLevel.littleEnemyAmount;
         bigEnemyAmunt = currentLevel.bigEnemyAmount;
 
-        Debug.Log(levelNumber);
     }                                      
 
 

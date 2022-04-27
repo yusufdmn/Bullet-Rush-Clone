@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    public GameObject pausePanel;
     public GameObject winPanel;
     public GameObject retryPanel;
     public GameObject joystickCanvas;
@@ -43,13 +44,17 @@ public class CanvasManager : MonoBehaviour
     public void ActivateWinPanel()
     {
         winPanel.SetActive(true);
-        joystickCanvas.SetActive(false);
     }
 
     public void ActivateLostPanel()
     {
         retryPanel.SetActive(true);
-        joystickCanvas.SetActive(false);
+    }
+
+    public void ActivateOrDeactivatePausePanel()
+    {
+        bool isPaused = pausePanel.activeSelf;
+        pausePanel.SetActive(!isPaused);
     }
 
 
@@ -62,4 +67,15 @@ public class CanvasManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    public void PauseButton()
+    {
+        ActivateOrDeactivatePausePanel();
+        GameManager.Instance.PauseGame();
+    }
+    public void ContinueButton()
+    {
+        GameManager.Instance.ContinueGame();
+        ActivateOrDeactivatePausePanel();
+    }
+
 }

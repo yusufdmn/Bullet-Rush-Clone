@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public int enemyLeft;
 
     public bool isGameOver;
-
+    public bool isPaused;
 
     private static GameManager _instance;       // ******Definition of SÝngleton********
     public static GameManager Instance { get { return _instance; } }
@@ -61,21 +61,34 @@ public class GameManager : MonoBehaviour
             return false;
         }
     }
+    public void PauseGame()
+    {
+        Player.StopMoveGamePaused();
+        BulletSpawner.StopSpawnBulletGamePaused();
+        Enemy.StopAttackGamePaused();
+    }
+    public void ContinueGame()
+    {
+        Player.ContinueMove();
+        BulletSpawner.ContinueSpawnBulletGamePaused();
+        Enemy.ContinueAttack();
+    }
+
 
     public void Playerwon()
     {
         LevelManager.Instance.IncreaseLevel();
         isGameOver = true;
         CanvasManager.Instance.ActivateWinPanel();
-        BulletSpawner.StopSpawnBullet();
-        Player.StopMove();
+        BulletSpawner.StopSpawnBulletGameOver();
+        Player.StopMoveGameOver();
     }
 
     public void PlayerLost()
     {
         isGameOver = true;
         CanvasManager.Instance.ActivateLostPanel();
-        BulletSpawner.StopSpawnBullet();
-        Player.StopMove();
+        BulletSpawner.StopSpawnBulletGameOver();
+        Player.StopMoveGameOver();
     }
 }

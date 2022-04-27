@@ -8,19 +8,21 @@ public class Player : MonoBehaviour
     public Joystick joystick;
     [SerializeField] private float speedOfPlayer;
     static bool isGameOver;
+    static bool isPaused;
 
     public Animator animatorPlayer;
 
     void Start()
     {
         isGameOver = false;
+        isPaused = false;
     }
   
 
     void Update()
     {
 
-        if(isGameOver == true)
+        if(isGameOver == true || isPaused == true)
         {
             ChangeRunAnimation(false);
             return;
@@ -43,9 +45,18 @@ public class Player : MonoBehaviour
     }
 
 
-    public static void StopMove()
+    public static void StopMoveGameOver()
     {
-        isGameOver = true;       
+        isGameOver = true;
+    }
+
+    public static void StopMoveGamePaused()
+    {
+        isPaused = true;
+    }
+    public static void ContinueMove()
+    {
+        isPaused = false;
     }
 
 

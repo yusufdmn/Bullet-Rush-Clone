@@ -12,8 +12,9 @@ public class BulletSpawner : MonoBehaviour
 
     private float distanceLimitWithEnemy;     // To spawn bullet when enemies are close enough
     private bool shouldSpawn;
-    
+
     private static bool isGameOver;
+    private static bool isPaused;
 
     private Vector3 closestEnemyPos;
 
@@ -33,7 +34,7 @@ public class BulletSpawner : MonoBehaviour
     void Update()
     {
 
-        if(isGameOver == false)
+        if(isGameOver == false && isPaused == false)
         {
             bulletSpawnTimer += Time.deltaTime;
 
@@ -94,8 +95,16 @@ public class BulletSpawner : MonoBehaviour
     }
 
 
-    public static void StopSpawnBullet()
+    public static void StopSpawnBulletGameOver()
     {
         isGameOver = true;
+    }
+    public static void StopSpawnBulletGamePaused()
+    {
+        isPaused = true;
+    }
+    public static void ContinueSpawnBulletGamePaused()
+    {
+        isPaused = false;
     }
 }

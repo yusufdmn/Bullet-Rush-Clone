@@ -39,7 +39,6 @@ public class EnemySpawner : MonoBehaviour
 
         littleEnemyAmount = LevelManager.Instance.littleEnemyAmunt;
         bigEnemyAmount = LevelManager.Instance.bigEnemyAmunt;
-        Debug.Log(littleEnemyAmount + "   " + bigEnemyAmount);
 
         SpawnEnemies(littleEnemyAmount, bigEnemyAmount);
     }
@@ -69,7 +68,6 @@ public class EnemySpawner : MonoBehaviour
             GameObject spawnedLittleEnemy = PoolManager.Instance.SpawnBulletFromPool(littleEnemyTag, spawnPosition, Quaternion.identity);
             spawnedLittleEnemy.SetActive(true);
             enemies.Add(spawnedLittleEnemy);
-            Debug.Log(enemies);
 
         }
 

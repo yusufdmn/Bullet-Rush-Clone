@@ -15,9 +15,20 @@ public class LittleEnemy : Enemy
 
     void Update()
     {
+        if (isPaused == true)
+        {
+            enemyAgent.speed = 0;
+        }
+        else
+        {
+            enemyAgent.speed = 10;
+        }
+
         float distance = CalculateDistance();
 
-        if (distance <= distanceLimit)
+
+
+        if (isPaused == false && distance <= distanceLimit)
         {
             AttackToPlayerDirectly();
         }

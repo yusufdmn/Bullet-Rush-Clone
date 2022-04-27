@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
 
     public float distanceLimit;
 
+    public static bool isPaused;
+
+
     public void GotDamage(int damage)
     {
         this.health -= damage;
@@ -35,5 +38,14 @@ public class Enemy : MonoBehaviour
         enemyAgent.SetDestination(player.position);
     }
 
+
+    public static void StopAttackGamePaused()
+    {
+        isPaused = true;
+    }
+    public static void ContinueAttack()
+    {
+        isPaused = false;
+    }
 
 }
