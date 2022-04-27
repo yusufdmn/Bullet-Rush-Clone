@@ -13,6 +13,8 @@ public class BigEnemy : Enemy
 
     void Start()
     {
+        DefineAnimator();
+
         player = GameObject.FindWithTag("Player").transform;
 
         frontOfPlayer = player.GetChild(0);
@@ -25,6 +27,7 @@ public class BigEnemy : Enemy
 
     void Update()
     {
+        LookAtPlayer();
 
         if (isPaused == true)
         {
