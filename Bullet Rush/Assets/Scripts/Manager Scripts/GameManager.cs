@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
+    public UnityEvent winEvent;
+    public UnityEvent loseEvent;
+
     public int totalEnemyAmount;
     public int enemyLeft;
 
@@ -27,6 +32,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        winEvent.AddListener(PlayerWon);
+        loseEvent.AddListener(PlayerLost);
+
         isGameOver = false;
         ArrayList enemies = EnemySpawner.Instance.enemies;
 
@@ -46,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         if(isPlayerWon == true)
         {
-            Playerwon();
+            winEvent.Invoke();
         }
     }
 
@@ -75,7 +83,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Playerwon()
+    public void PlayerWon()
     {
         LevelManager.Instance.IncreaseLevel();
         isGameOver = true;

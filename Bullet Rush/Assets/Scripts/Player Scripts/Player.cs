@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            GameManager.Instance.PlayerLost();
+            GameManager.Instance.loseEvent.Invoke();
         }
     }
 
