@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver;
     public bool isPaused;
 
-    private static GameManager _instance;       // ******Definition of SÝngleton********
+    private static GameManager _instance;       // ******Definition of Singleton********
     public static GameManager Instance { get { return _instance; } }
     private void Awake() 
     {
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
-    }                                            // ******Definition of SÝngleton********
+    }                                            // ******Definition of Singleton********
 
 
     private void Start()
